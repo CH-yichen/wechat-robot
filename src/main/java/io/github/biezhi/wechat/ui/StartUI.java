@@ -3,6 +3,15 @@ package io.github.biezhi.wechat.ui;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import io.github.biezhi.wechat.Utils;
 import io.github.biezhi.wechat.api.WechatApi;
 import io.github.biezhi.wechat.handle.MessageHandle;
@@ -10,15 +19,6 @@ import io.github.biezhi.wechat.model.Const;
 import io.github.biezhi.wechat.model.Environment;
 import io.github.biezhi.wechat.model.GroupMessage;
 import io.github.biezhi.wechat.model.UserMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * @author biezhi
@@ -48,17 +48,17 @@ public class StartUI extends WechatApi {
             getUUID();
             log.info(Const.LOG_MSG_GET_QRCODE);
             final String qrCodePath = genqrcode();
-            EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    try {
-                        if (null != qrCodeFrame) qrCodeFrame.dispose();
-                        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-                        qrCodeFrame = new QRCodeFrame(qrCodePath);
-                    } catch (Exception e) {
-                        log.error("显示二维码失败", e);
-                    }
-                }
-            });
+//            EventQueue.invokeLater(new Runnable() {
+//                public void run() {
+//                    try {
+//                        if (null != qrCodeFrame) qrCodeFrame.dispose();
+//                        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+//                        qrCodeFrame = new QRCodeFrame(qrCodePath);
+//                    } catch (Exception e) {
+//                        log.error("显示二维码失败", e);
+//                    }
+//                }
+//            });
             log.info(Const.LOG_MSG_SCAN_QRCODE);
             if (!waitforlogin(1)) {
                 continue;
@@ -69,8 +69,10 @@ public class StartUI extends WechatApi {
             }
             break;
         }
-        qrCodeFrame.setVisible(false);
-        qrCodeFrame.dispose();
+        if (qrCodeFrame != null) {
+            qrCodeFrame.setVisible(false);
+            qrCodeFrame.dispose();
+        }
     }
 
     /**
