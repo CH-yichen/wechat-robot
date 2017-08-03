@@ -6,8 +6,7 @@ import okhttp3.OkHttpClient;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author biezhi
- *         18/06/2017
+ * @author biezhi 18/06/2017
  */
 public abstract class BaseTest {
 

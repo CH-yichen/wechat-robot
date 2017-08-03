@@ -1,13 +1,13 @@
 package io.github.biezhi.wechat.model;
 
 import com.google.gson.JsonObject;
+
 import io.github.biezhi.wechat.api.WechatApi;
 
 /**
  * 群消息
  *
- * @author biezhi
- *         17/06/2017
+ * @author biezhi 17/06/2017
  */
 public class GroupMessage extends UserMessage {
 

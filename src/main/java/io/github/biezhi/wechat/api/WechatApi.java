@@ -1,25 +1,41 @@
 package io.github.biezhi.wechat.api;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import io.github.biezhi.wechat.Utils;
-import io.github.biezhi.wechat.model.Const;
-import io.github.biezhi.wechat.model.Environment;
-import io.github.biezhi.wechat.model.Session;
-import okhttp3.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import io.github.biezhi.wechat.Utils;
+import io.github.biezhi.wechat.model.Const;
+import io.github.biezhi.wechat.model.Environment;
+import io.github.biezhi.wechat.model.Session;
+import okhttp3.FormBody;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 微信API实现
  *
- * @author biezhi
- *         16/06/2017
+ * @author biezhi 16/06/2017
  */
 public class WechatApi {
 
@@ -208,8 +224,6 @@ public class WechatApi {
 
     /**
      * 获取uuid
-     *
-     * @return
      */
     public boolean getUUID() {
         String url = conf.get("API_jsLogin");
@@ -274,7 +288,6 @@ public class WechatApi {
      * 等待登录
      *
      * @param tip 1:等待扫描二维码 0:等待微信客户端确认
-     * @return
      */
     public boolean waitforlogin(int tip) {
         Utils.sleep(tip);
@@ -315,8 +328,6 @@ public class WechatApi {
 
     /**
      * 登录微信
-     *
-     * @return
      */
     public boolean login() {
 
@@ -355,9 +366,6 @@ public class WechatApi {
 
     /**
      * 微信初始化
-     *
-     * @return
-     * @throws WechatException
      */
     public boolean webwxinit() {
         if (null == session) {
@@ -395,8 +403,6 @@ public class WechatApi {
 
     /**
      * 开启状态通知
-     *
-     * @return
      */
     public boolean openStatusNotify() {
         String url = conf.get("API_webwxstatusnotify") + "?lang=%s&pass_ticket=%s";
@@ -419,8 +425,6 @@ public class WechatApi {
 
     /**
      * 获取联系人信息
-     *
-     * @return
      */
     public boolean getContact() {
         String url = conf.get("API_webwxgetcontact") + "?pass_ticket=%s&skey=%s&r=%s";
@@ -464,9 +468,6 @@ public class WechatApi {
 
     /**
      * 批量获取群成员
-     *
-     * @param groupIds
-     * @return
      */
     public JsonArray batchGetContact(List<String> groupIds) {
         String url = conf.get("API_webwxbatchgetcontact") + "?type=ex&r=%s&pass_ticket=%s";
@@ -492,8 +493,6 @@ public class WechatApi {
 
     /**
      * 和微信保持同步
-     *
-     * @return
      */
     public JsonObject wxSync() {
         String url = conf.get("API_webwxsync") + "?sid=%s&skey=%s&pass_ticket=%s";
@@ -521,8 +520,6 @@ public class WechatApi {
 
     /**
      * 拉取群成员
-     *
-     * @return
      */
     public void fetchGroupContacts() {
         log.debug("fetchGroupContacts");
@@ -555,8 +552,6 @@ public class WechatApi {
 
     /**
      * 微信同步检查
-     *
-     * @return
      */
     public int[] synccheck() {
         String url = conf.get("API_synccheck");
@@ -586,10 +581,6 @@ public class WechatApi {
 
     /**
      * 根据用户id和群id查询用户信息
-     *
-     * @param userId
-     * @param groupId
-     * @return
      */
     public Map<String, String> getGroupUserById(String userId, String groupId) {
         String unknownPeople = Const.LOG_MSG_UNKNOWN_NAME + userId;
@@ -628,9 +619,6 @@ public class WechatApi {
 
     /**
      * 根据群id查询群信息
-     *
-     * @param groupId
-     * @return
      */
     public Map<String, String> getGroupById(String groupId) {
         String unknownGroup = Const.LOG_MSG_UNKNOWN_GROUP_NAME + groupId;
@@ -659,9 +647,6 @@ public class WechatApi {
 
     /**
      * 根据用户id查询用户信息
-     *
-     * @param userId
-     * @return
      */
     public Map<String, String> getUserById(String userId) {
         String unknownPeople = Const.LOG_MSG_UNKNOWN_NAME + userId;
@@ -706,10 +691,6 @@ public class WechatApi {
 
     /**
      * 发送微信消息
-     *
-     * @param msg
-     * @param to
-     * @return
      */
     public JsonObject wxSendMessage(String msg, String to) {
 
@@ -737,9 +718,6 @@ public class WechatApi {
 
     /**
      * 发送文本消息
-     *
-     * @param msg
-     * @param uid
      */
     public void sendText(String msg, String uid) {
         this.wxSendMessage(msg, uid);

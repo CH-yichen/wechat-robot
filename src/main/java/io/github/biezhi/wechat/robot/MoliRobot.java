@@ -1,6 +1,7 @@
 package io.github.biezhi.wechat.robot;
 
 import com.google.gson.JsonObject;
+
 import io.github.biezhi.wechat.Utils;
 import io.github.biezhi.wechat.handle.AbstractMessageHandler;
 import io.github.biezhi.wechat.model.Environment;
@@ -16,8 +17,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 茉莉机器人实现
  *
- * @author biezhi
- *         17/06/2017
+ * @author biezhi 17/06/2017
  */
 public class MoliRobot extends AbstractMessageHandler {
 

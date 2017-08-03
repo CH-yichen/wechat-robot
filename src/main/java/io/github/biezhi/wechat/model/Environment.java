@@ -1,6 +1,7 @@
 package io.github.biezhi.wechat.model;
 
 import io.github.biezhi.wechat.Utils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +22,7 @@ import java.util.Set;
 /**
  * 环境配置读取
  *
- * @author biezhi
- *         2017/6/1
+ * @author biezhi 2017/6/1
  */
 public class Environment {
 
@@ -39,9 +39,6 @@ public class Environment {
 
     /**
      * Properties to Environment
-     *
-     * @param props
-     * @return
      */
     public static Environment of(Properties props) {
         Environment environment = new Environment();
@@ -51,9 +48,6 @@ public class Environment {
 
     /**
      * Map to Environment
-     *
-     * @param map
-     * @return
      */
     public static Environment of(Map<String, String> map) {
         Environment environment = new Environment();
@@ -66,9 +60,6 @@ public class Environment {
 
     /**
      * load Environment by URL
-     *
-     * @param url
-     * @return
      */
     public Environment of(URL url) {
         String location = url.getPath();
@@ -84,9 +75,6 @@ public class Environment {
 
     /**
      * load Environment by file
-     *
-     * @param file
-     * @return
      */
     public static Environment of(File file) {
         try {
@@ -98,9 +86,6 @@ public class Environment {
 
     /**
      * load Environment by location
-     *
-     * @param location
-     * @return
      */
     public static Environment of(String location) {
         if (location.startsWith("classpath:")) {

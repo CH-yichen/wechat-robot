@@ -21,8 +21,7 @@ import io.github.biezhi.wechat.model.GroupMessage;
 import io.github.biezhi.wechat.model.UserMessage;
 
 /**
- * @author biezhi
- *         17/06/2017
+ * @author biezhi 17/06/2017
  */
 public class StartUI extends WechatApi {
 

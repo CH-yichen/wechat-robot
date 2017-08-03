@@ -2,6 +2,7 @@ package io.github.biezhi.wechat;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +18,7 @@ import java.util.regex.Pattern;
 /**
  * 工具类
  *
- * @author biezhi
- *         17/06/2017
+ * @author biezhi 17/06/2017
  */
 public final class Utils {
 
@@ -31,9 +31,6 @@ public final class Utils {
 
     /**
      * 按顺序创建一个Map
-     *
-     * @param values
-     * @return
      */
     public static Map<String, Object> createMap(Object... values) {
         Map<String, Object> map = new HashMap<String, Object>(values.length / 2);
@@ -45,10 +42,6 @@ public final class Utils {
 
     /**
      * 当str1为null或者空则使用str2
-     *
-     * @param str1
-     * @param str2
-     * @return
      */
     public static String emptyOr(String str1, String str2) {
         if (isBlank(str1)) {
@@ -59,8 +52,6 @@ public final class Utils {
 
     /**
      * 让JVM休眠timeout毫秒
-     *
-     * @param timeout
      */
     public static void sleep(long timeout) {
         try {
@@ -72,10 +63,6 @@ public final class Utils {
 
     /**
      * 正则匹配
-     *
-     * @param p
-     * @param str
-     * @return
      */
     public static String match(String p, String str) {
         Pattern pattern = Pattern.compile(p);
@@ -88,8 +75,6 @@ public final class Utils {
 
     /**
      * 关闭Closeable
-     *
-     * @param closeable
      */
     public static void closeQuietly(Closeable closeable) {
         try {
@@ -101,9 +86,6 @@ public final class Utils {
 
     /**
      * 判断str是否为空
-     *
-     * @param str
-     * @return
      */
     public static boolean isBlank(String str) {
         return null == str || "".equals(str.trim());
@@ -111,9 +93,6 @@ public final class Utils {
 
     /**
      * 判断str是否不为空
-     *
-     * @param str
-     * @return
      */
     public static boolean isNotBlank(String str) {
         return !isBlank(str) && !"null".equalsIgnoreCase(str);
@@ -121,9 +100,6 @@ public final class Utils {
 
     /**
      * 获取size个随机字符
-     *
-     * @param size
-     * @return
      */
     public static String getRandomNumber(int size) {
         String num = "";
@@ -162,9 +138,6 @@ public final class Utils {
 
     /**
      * Unicode字符串转为UTF8
-     *
-     * @param str
-     * @return
      */
     public static String unicodeToUtf8(String str) {
         try {
@@ -185,9 +158,6 @@ public final class Utils {
 
     /**
      * 将List Cookie转为String
-     *
-     * @param cookies
-     * @return
      */
     public static String getCookie(List<String> cookies) {
         StringBuilder sBuffer = new StringBuilder();

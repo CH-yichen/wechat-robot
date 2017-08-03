@@ -21,8 +21,7 @@ import static io.github.biezhi.wechat.api.WechatApi.JSON;
 /**
  * 图灵机器人实现
  *
- * @author biezhi
- *         17/06/2017
+ * @author biezhi 17/06/2017
  */
 public class TulingRobot extends AbstractMessageHandler {
 
@@ -103,7 +102,6 @@ public class TulingRobot extends AbstractMessageHandler {
         }
         return null;
     }
-
 
 
     class TulingRet {

@@ -11,8 +11,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * @author biezhi
- *         18/06/2017
+ * @author biezhi 18/06/2017
  */
 public class RobotTest extends BaseTest {
 
@@ -42,7 +41,7 @@ public class RobotTest extends BaseTest {
         //加密
         Aes mc = new Aes(key);
 //        String dataJson = Utils.toJson(data);
-        String dataJson = "{\"key\":\""+apiKey+"\",\"info\":\""+ "你好" +"\"}";
+        String dataJson = "{\"key\":\"" + apiKey + "\",\"info\":\"" + "你好" + "\"}";
 
         String dataStr = mc.encrypt(dataJson);
 
