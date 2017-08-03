@@ -1,6 +1,11 @@
 package io.github.biezhi.wechat.robot;
 
 import com.google.gson.JsonObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import io.github.biezhi.wechat.Utils;
 import io.github.biezhi.wechat.handle.AbstractMessageHandler;
 import io.github.biezhi.wechat.model.Environment;
@@ -10,10 +15,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import static io.github.biezhi.wechat.api.WechatApi.JSON;
 
@@ -82,6 +83,7 @@ public class TulingRobot extends AbstractMessageHandler {
         json.put("key", apiKey);
         json.put("timestamp", timestamp);
         json.put("data", dataStr);
+        json.put("info", question); // 明文传输
 
         RequestBody requestBody = RequestBody.create(JSON, Utils.toJson(json));
         Request request = new Request.Builder()
@@ -95,16 +97,26 @@ public class TulingRobot extends AbstractMessageHandler {
             if (tulingRet.code == 100000) {
                 return tulingRet.text;
             }
+            System.out.println("error " + tulingRet);
         } catch (Exception e) {
             return null;
         }
         return null;
     }
 
+
+
     class TulingRet {
         int code;
         String text;
 
+        @Override
+        public String toString() {
+            return "TulingRet{" +
+                    "code=" + code +
+                    ", text='" + text + '\'' +
+                    '}';
+        }
     }
 
 }

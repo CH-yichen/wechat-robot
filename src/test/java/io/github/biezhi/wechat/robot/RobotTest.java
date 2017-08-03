@@ -1,13 +1,14 @@
 package io.github.biezhi.wechat.robot;
 
-import io.github.biezhi.wechat.Utils;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import io.github.biezhi.wechat.Utils;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * @author biezhi
@@ -26,8 +27,8 @@ public class RobotTest extends BaseTest {
     @Test
     public void testTuling() throws Exception {
         String url = "http://www.tuling123.com/openapi/api";
-        String apiKey = "";
-        String secret = "";
+        String apiKey = "213a19f54e1f42f7bbfbfafa532c6690";
+        String secret = "6a906bece8691c8bONOFF";
 
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("key", apiKey);
@@ -40,7 +41,10 @@ public class RobotTest extends BaseTest {
 
         //加密
         Aes mc = new Aes(key);
-        String dataStr = mc.encrypt(Utils.toJson(data));
+//        String dataJson = Utils.toJson(data);
+        String dataJson = "{\"key\":\""+apiKey+"\",\"info\":\""+ "你好" +"\"}";
+
+        String dataStr = mc.encrypt(dataJson);
 
         //封装请求参数
         Map<String, Object> json = new HashMap<String, Object>();
